@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"watch": false,
+		"outDir": "build",
+		"rootDir": "src",
+		"target": "ESNext",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"downlevelIteration": true,
+		"allowSyntheticDefaultImports": true,
+		"importHelpers": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"removeComments": true,
+		"noEmitOnError": true,
+		"strict": false,
+		"alwaysStrict": false,
+		"noImplicitReturns": true,
+		"noImplicitAny": false,
+		"resolveJsonModule": true,
+		"declaration": true,
+		"typeRoots": ["node_modules/@types/"]
+	},
+	"include": ["src/**/*", "db.json"],
+	"exclude": ["node_modules", "build"]
+}
