@@ -1,5 +1,5 @@
 {
-  "name": "dfscript",
+  "name": "@userunp/dfscript",
   "version": "1.0.0",
   "description": "A way to create code templates for the Minecraft server DiamondFire, mcdiamondfire.com",
   "main": "build/index.js",
@@ -10,6 +10,10 @@
   },
   "author": "UserUNP#9235",
   "license": "ISC",
+  "repository": "https://github.com/UserUNP/dfscript",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@types/node": "^16.11.7",
     "ts-node": "^10.4.0",

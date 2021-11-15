@@ -4,6 +4,7 @@ export default abstract class Item {
     public slot:number;
     /**
      * Create a new item variable
+     * @constructor
      * @param value The value
      * @param slot Slot number on the parameter chest (begins from 0)
      */

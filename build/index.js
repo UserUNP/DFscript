@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Player = exports.Text = exports.IFENTITY_CONDITIONS = exports.IFPLAYER_CONDITIONS = exports.ENTITY_ACTIONS = exports.PLAYER_ACTIONS = void 0;
+exports.Template = exports.Player = exports.loc = exports.num = exports.txt = exports.Location = exports.Number = exports.Text = exports.IFENTITY_CONDITIONS = exports.IFPLAYER_CONDITIONS = exports.ENTITY_ACTIONS = exports.PLAYER_ACTIONS = void 0;
 const tslib_1 = require("tslib");
 const db_json_1 = (0, tslib_1.__importDefault)(require("./db.json"));
 exports.PLAYER_ACTIONS = db_json_1.default.actions.filter(x => x.codeblockName === "PLAYER ACTION").map(x => x.name);
@@ -9,6 +9,13 @@ exports.IFPLAYER_CONDITIONS = db_json_1.default.actions.filter(x => x.codeblockN
 exports.IFENTITY_CONDITIONS = db_json_1.default.actions.filter(x => x.codeblockName === "IF ENTITY").map(x => x.name);
 const Text_1 = (0, tslib_1.__importDefault)(require("./Components/Variables/Text"));
 exports.Text = Text_1.default;
+exports.txt = Text_1.default;
+const Number_1 = (0, tslib_1.__importDefault)(require("./Components/Variables/Number"));
+exports.Number = Number_1.default;
+exports.num = Number_1.default;
+const Location_1 = (0, tslib_1.__importDefault)(require("./Components/Variables/Location"));
+exports.Location = Location_1.default;
+exports.loc = Location_1.default;
 const Player_1 = (0, tslib_1.__importDefault)(require("./Components/Codeblocks/Player"));
 exports.Player = Player_1.default;
 const pako_1 = (0, tslib_1.__importDefault)(require("pako"));
@@ -23,8 +30,6 @@ class Template {
         this.codeblocks = codeblocks;
         this.creator = creator;
         this.sendToCodeutils = sendToCodeutils;
-        if (sendToCodeutils == undefined)
-            sendToCodeutils = false;
         this.json = {
             "blocks": [
                 {
@@ -60,5 +65,5 @@ class Template {
         return (btoa(String.fromCharCode.apply(null, new Uint16Array(pako_1.default.gzip(JSON.stringify(this.json))))));
     }
 }
-exports.default = Template;
+exports.Template = Template;
 //# sourceMappingURL=index.js.map

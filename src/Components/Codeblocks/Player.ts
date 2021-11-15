@@ -11,7 +11,7 @@ const Player = {
 	 * @returns {Codeblock} The JSON format
 	 */
 	action: (name:string, items: Item[] = [], selection: string = ""): Codeblock => {
-		if(!(PLAYER_ACTIONS.includes(name))) throw `$Player.action {name} does not exist`
+		if(!(PLAYER_ACTIONS.includes(name))) throw `Player.action ${name} does not exist`
 		return  {
 			id: "block",
 			block: "player_action",

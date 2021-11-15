@@ -5,21 +5,30 @@ export const ENTITY_ACTIONS = db.actions.filter(x => x.codeblockName === "ENTITY
 export const IFPLAYER_CONDITIONS = db.actions.filter(x => x.codeblockName === "IF PLAYER").map(x => x.name);
 export const IFENTITY_CONDITIONS = db.actions.filter(x => x.codeblockName === "IF ENTITY").map(x => x.name);
 
+export const POTION_TYPES = db.potions.map(x=>x.icon.name);
+export const SOUND_TYPES = db.sounds.map(x=>x.icon.name)
+
 import Item from "./Components/Item";
 import Codeblock from "./Components/Codeblock";
 export type item = Item;
 export type codeblock = Codeblock;
 
 import Text from "./Components/Variables/Text";
+import Number from "./Components/Variables/Number";
+import Location from "./Components/Variables/Location";
+import Vector from "./Components/Variables/Vector";
+export {Text, Number, Location, Vector}
+// Quality of life for saving your sanity when using alot of values
+export {Text as txt, Number as num, Location as loc, Vector as vec}
+
 import Player from "./Components/Codeblocks/Player";
-export {Text, Player}
+export {Player}
 
 import pako from "pako";
 
-export default class Template {
+export class Template {
 	json: { blocks: any; };
 	constructor(public name: string, public codeblocks: Codeblock[], public creator?: string, private sendToCodeutils: boolean = false) {
-		if (sendToCodeutils == undefined) sendToCodeutils = false;
 		this.json = {
 			"blocks": [
 				{

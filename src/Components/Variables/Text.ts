@@ -1,7 +1,7 @@
 import Item from "../Item";
 
 class Text extends Item {
-    constructor(value, slot:number) {
+    constructor(value:string, slot:number) {
         super(value, slot);
     }
     compile(): { item: { id: string; data: any; }; slot: string; } {

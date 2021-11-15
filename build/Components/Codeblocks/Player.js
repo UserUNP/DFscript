@@ -4,7 +4,7 @@ const __1 = require("../..");
 const Player = {
     action: (name, items = [], selection = "") => {
         if (!(__1.PLAYER_ACTIONS.includes(name)))
-            throw `$Player.action {name} does not exist`;
+            throw `Player.action ${name} does not exist`;
         return {
             id: "block",
             block: "player_action",

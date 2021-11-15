@@ -1,6 +1,6 @@
 import Item from "../Item";
-declare class Text extends Item {
-    constructor(value: string, slot: number);
+declare class Number extends Item {
+    constructor(value: number, slot: number);
     compile(): {
         item: {
             id: string;
@@ -9,4 +9,4 @@ declare class Text extends Item {
         slot: string;
     };
 }
-export default Text;
+export default Number;

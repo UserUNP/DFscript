@@ -1,0 +1,37 @@
+name: Publish to the npm registery
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build on Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --ignore-scripts
+      - run: npm run build --if-present
+        name: Build
+        env:
+          CI: true
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm publish --ignore-scripts
+          npm config set //npm.pkg.github.com/:_authToken ${GPH_TOKEN}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GPH_TOKEN: ${{ secrets.GPH_TOKEN }}

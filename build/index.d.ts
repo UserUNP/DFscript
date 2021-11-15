@@ -7,9 +7,13 @@ import Codeblock from "./Components/Codeblock";
 export declare type item = Item;
 export declare type codeblock = Codeblock;
 import Text from "./Components/Variables/Text";
+import Number from "./Components/Variables/Number";
+import Location from "./Components/Variables/Location";
+export { Text, Number, Location };
+export { Text as txt, Number as num, Location as loc };
 import Player from "./Components/Codeblocks/Player";
-export { Text, Player };
-export default class Template {
+export { Player };
+export declare class Template {
     name: string;
     codeblocks: Codeblock[];
     creator?: string;
