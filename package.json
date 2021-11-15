@@ -1,5 +1,5 @@
 {
-  "name": "@userunp/dfscript",
+  "name": "dfscript",
   "version": "1.0.0",
   "description": "A way to create code templates for the Minecraft server DiamondFire, mcdiamondfire.com",
   "main": "build/index.js",
