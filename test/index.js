@@ -1,4 +1,4 @@
-const {Template, Player, txt,dfvar} = require("..")
+const {Template, Player, txt, dfvar} = require("..")
 
 const test = new Template("test template", [
 	Player.if("IsSneaking").then(
@@ -7,4 +7,3 @@ const test = new Template("test template", [
 ])
 
 console.log(test.compile());
-

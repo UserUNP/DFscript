@@ -1,12 +1,13 @@
 {
   "name": "dfscript",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A way to create code templates for the Minecraft server DiamondFire, mcdiamondfire.com",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": ["/build"],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "postpublish": "git add . && git commit && git push"
   },
   "author": "UserUNP#9235",
   "license": "ISC",
