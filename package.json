@@ -7,7 +7,7 @@
   "files": ["/build"],
   "scripts": {
     "build": "tsc",
-    "postpublish": "git add . && git commit && git push"
+    "postpublish": "git add . && git commit && git push origin master"
   },
   "author": "UserUNP#9235",
   "license": "ISC",
