@@ -1,15 +1,20 @@
 # DFscript
-<p align="center">Compile Javascript code to DiamondFire code templates! mcdiamondfire.com</p>
-<p align="center">Current version: 1.0.3 beta</p>
+<div align="center">
+  <p>Compile Javascript code to DiamondFire code templates! mcdiamondfire.com</p>
+  <p>Current version: 1.0.3 beta</p>
+</div>
 <hr>  
 
-### TODO:
+<details>
+  <summary>TODO:</summary>
+  
   - [x] Player action, Player if codeblocks
   - [ ] Vanilla Minecraft item variables
-    - [ ] item name
-    - [ ] item material or name id _`(stone_sword, grass_block, diamond_ore, etc..)`_
+    - [x] item name
+    - [x] item material or name id _`(stone_sword, grass_block, diamond_ore, etc..)`_
     - [ ] item display name effetcs _`(color, bold, italic, etc..)`_
-
+    - [ ] item lore
+</details>
 
 ## Examples:  
 <details>
