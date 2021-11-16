@@ -1,6 +1,6 @@
 import VariableType from "../VariableType";
-declare class Location extends VariableType {
-    constructor(x: number, y: number, z: number, slot: number);
+declare class VarItem extends VariableType {
+    constructor(name: string, scope: string, slot: number);
     compile(): {
         item: {
             id: string;
@@ -9,4 +9,4 @@ declare class Location extends VariableType {
         slot: string;
     };
 }
-export default Location;
+export default VarItem;

@@ -1,6 +1,6 @@
-import { PLAYER_ACTIONS } from "../..";
+import { PLAYER_ACTIONS, IFPLAYER_CONDITIONS } from "../..";
 import Codeblock from "../Codeblock"
-import Item from "../Item"
+import VariableType from "../VariableType"
 
 const Player = {
 	/**
@@ -10,14 +10,32 @@ const Player = {
 	 * @param selection Target Selection (optional)
 	 * @returns {Codeblock} The JSON format
 	 */
-	action: (name:string, items: Item[] = [], selection: string = ""): Codeblock => {
-		if(!(PLAYER_ACTIONS.includes(name))) throw `Player.action ${name} does not exist`
-		return  {
+	action: (name: string, items: VariableType[] = [], selection: string = ""): Codeblock => {
+		if (!(PLAYER_ACTIONS.includes(name))) throw `Player.action ${name} does not exist`;
+		return {
 			id: "block",
 			block: "player_action",
 			args: { "items": items.map((item) => item.compile()) },
 			action: name,
 			target: selection
+		}
+	},
+	if: (condition: string, items: VariableType[] = []): Codeblock => {
+		if (!(IFPLAYER_CONDITIONS.includes(condition))) throw `Player.if ${condition} does not exist`;
+		return {
+			id: "block",
+			block: "if_player",
+			args: { "items": items.map((item) => item.compile()) },
+			action: condition,
+			then: (...codeblocks: Codeblock[]): Codeblock => {
+				return {
+					id: "block",
+					block: "if_player",
+					args: { "items": items.map((item) => item.compile()) },
+					action: condition,
+					dfscript__ifstatementContent: codeblocks
+				}
+			}
 		}
 	}
 };

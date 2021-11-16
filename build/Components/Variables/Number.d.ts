@@ -1,5 +1,5 @@
-import Item from "../Item";
-declare class Number extends Item {
+import VariableType from "../VariableType";
+declare class Number extends VariableType {
     constructor(value: number, slot: number);
     compile(): {
         item: {

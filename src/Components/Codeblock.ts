@@ -1,8 +1,9 @@
 export default interface Codeblock {
-	id: "block",
+    id: "block",
     block: string,
-    args: { "items": {"item":{"id":string, "data":any}, "slot":string}[] },
+    args: { "items": { "item": { "id": string, "data": any }, "slot": string }[] },
     action: string,
-    target: string,
-	dfjs__ifstatementContent?: Codeblock[]
+    target?: string,
+    dfscript__ifstatementContent?: Codeblock[],
+    then?(...codeblocks: Codeblock[]): any
 }

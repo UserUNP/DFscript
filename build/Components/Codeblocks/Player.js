@@ -12,6 +12,25 @@ const Player = {
             action: name,
             target: selection
         };
+    },
+    if: (condition, items = []) => {
+        if (!(__1.IFPLAYER_CONDITIONS.includes(condition)))
+            throw `Player.if ${condition} does not exist`;
+        return {
+            id: "block",
+            block: "if_player",
+            args: { "items": items.map((item) => item.compile()) },
+            action: condition,
+            then: (...codeblocks) => {
+                return {
+                    id: "block",
+                    block: "if_player",
+                    args: { "items": items.map((item) => item.compile()) },
+                    action: condition,
+                    dfscript__ifstatementContent: codeblocks
+                };
+            }
+        };
     }
 };
 exports.default = Player;

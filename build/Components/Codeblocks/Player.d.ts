@@ -1,6 +1,7 @@
 import Codeblock from "../Codeblock";
-import Item from "../Item";
+import VariableType from "../VariableType";
 declare const Player: {
-    action: (name: string, items?: Item[], selection?: string) => Codeblock;
+    action: (name: string, items?: VariableType[], selection?: string) => Codeblock;
+    if: (condition: string, items?: VariableType[]) => Codeblock;
 };
 export default Player;

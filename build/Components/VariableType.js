@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Item {
+class VariableType {
     value;
     slot;
     constructor(value, slot) {
@@ -8,5 +8,5 @@ class Item {
         this.slot = slot;
     }
 }
-exports.default = Item;
-//# sourceMappingURL=Item.js.map
+exports.default = VariableType;
+//# sourceMappingURL=VariableType.js.map

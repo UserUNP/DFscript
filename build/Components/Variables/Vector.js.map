@@ -1,1 +1,1 @@
-{"version":3,"file":"Vector.js","sourceRoot":"","sources":["../../../src/Components/Variables/Vector.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Vector.js","sourceRoot":"","sources":["../../../src/Components/Variables/Vector.ts"],"names":[],"mappings":";;;AAAA,gFAA2C;AAE3C,MAAM,MAAO,SAAQ,sBAAY;IAC7B,YAAY,KAAa,EAAE,IAAY;QACnC,KAAK,CAAC,KAAK,EAAE,IAAI,CAAC,CAAC;IACvB,CAAC;IACD,OAAO;QACH,OAAO,EAAE,MAAM,EAAE,EAAE,IAAI,EAAE,KAAK,EAAE,MAAM,EAAE,IAAI,CAAC,KAAK,EAAE,EAAE,MAAM,EAAE,GAAG,IAAI,CAAC,IAAI,EAAE,EAAE,CAAC;IACnF,CAAC;CACJ;AAED,kBAAe,MAAM,CAAC"}

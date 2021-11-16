@@ -8,18 +8,29 @@ export const IFENTITY_CONDITIONS = db.actions.filter(x => x.codeblockName === "I
 export const POTION_TYPES = db.potions.map(x=>x.icon.name);
 export const SOUND_TYPES = db.sounds.map(x=>x.icon.name)
 
-import Item from "./Components/Item";
+import VariableType from "./Components/VariableType";
 import Codeblock from "./Components/Codeblock";
-export type item = Item;
+export type variableType = VariableType;
 export type codeblock = Codeblock;
 
 import Text from "./Components/Variables/Text";
 import Number from "./Components/Variables/Number";
 import Location from "./Components/Variables/Location";
 import Vector from "./Components/Variables/Vector";
-export {Text, Number, Location, Vector}
-// Quality of life for saving your sanity when using alot of values
-export {Text as txt, Number as num, Location as loc, Vector as vec}
+import Item from "./Components/Variables/Item";
+import VarItem from "./Components/Variables/VarItem";
+export {Text,
+		Number,
+		Location,
+		Vector,
+		Item,
+		VarItem}
+export {Text as txt,
+		Number as num,
+		Location as loc,
+		Vector as vec,
+		Item as item,
+		VarItem as dfvar}
 
 import Player from "./Components/Codeblocks/Player";
 export {Player}
@@ -48,9 +59,9 @@ export class Template {
 
 	public compile() {
 		this.codeblocks.forEach((block) => {
-			if (block.hasOwnProperty("dfjs__ifstatementContent")) {
-				const ifstatementContnet = block.dfjs__ifstatementContent;
-				delete block.dfjs__ifstatementContent;
+			if (block.hasOwnProperty("dfscript__ifstatementContent")) {
+				const ifstatementContnet = block.dfscript__ifstatementContent;
+				delete block.dfscript__ifstatementContent;
 				this.json.blocks.push(block);
 				this.json.blocks.push({ "id": "bracket", "direct": "open", "type": "norm" });
 				ifstatementContnet.forEach((if_block) => {

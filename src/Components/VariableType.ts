@@ -1,14 +1,14 @@
-export default abstract class Item {
+export default abstract class VariableType {
 
-    public value;
-    public slot:number;
+    public value: any;
+    public slot: number;
     /**
      * Create a new item variable
      * @constructor
      * @param value The value
      * @param slot Slot number on the parameter chest (begins from 0)
      */
-    constructor(value, slot:number) {
+    constructor(value: any, slot: number) {
         this.value = value;
         this.slot = slot;
     }
@@ -17,5 +17,5 @@ export default abstract class Item {
      * Compile the item variable to JSON
      * @returns The JSON format
      */
-    abstract compile():{"item":{"id":string, "data":any}, "slot":string}
+    abstract compile(): { "item": { "id": string, "data": any }, "slot": string }
 }

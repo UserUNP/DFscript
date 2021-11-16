@@ -1,4 +1,4 @@
-export default abstract class Item {
+export default abstract class Variable {
     value: any;
     slot: number;
     constructor(value: any, slot: number);

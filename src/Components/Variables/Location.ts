@@ -1,19 +1,11 @@
-import Item from "../Item";
+import VariableType from "../VariableType";
 
-interface Location {
-	x: number
-	y: number
-	z: number
-	pitch?: number
-	yaw?: number
-}
-
-class Location extends Item {
-    constructor(value:Location, slot:number) {
-        super(value, slot);
+class Location extends VariableType {
+    constructor(x: number, y: number, z: number, slot: number) {
+        super({ x: x, y: y, z: z }, slot);
     }
     compile(): { item: { id: string; data: any; }; slot: string; } {
-        return {"item": {"id":"loc", "data":{"loc":this.value}}, "slot": `${this.slot}`};
+        return { "item": { "id": "loc", "data": { "loc": this.value } }, "slot": `${this.slot}` };
     }
 }
 
