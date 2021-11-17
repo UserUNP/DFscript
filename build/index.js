@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Template = exports.Player = exports.dfvar = exports.item = exports.vec = exports.loc = exports.num = exports.txt = exports.VarItem = exports.Item = exports.Vector = exports.Location = exports.Number = exports.Text = exports.SOUND_TYPES = exports.POTION_TYPES = exports.IFENTITY_CONDITIONS = exports.IFPLAYER_CONDITIONS = exports.ENTITY_ACTIONS = exports.PLAYER_ACTIONS = void 0;
+exports.Template = exports.Player = exports.dfvar = exports.item = exports.vec = exports.loc = exports.num = exports.txt = exports.VarItem = exports.Item = exports.Vector = exports.Location = exports.Number = exports.Text = exports.CodeblockBuilder = exports.VariableType = exports.SOUND_TYPES = exports.POTION_TYPES = exports.IFENTITY_CONDITIONS = exports.IFPLAYER_CONDITIONS = exports.ENTITY_ACTIONS = exports.PLAYER_ACTIONS = void 0;
 const tslib_1 = require("tslib");
 const db_json_1 = (0, tslib_1.__importDefault)(require("./db.json"));
 exports.PLAYER_ACTIONS = db_json_1.default.actions.filter(x => x.codeblockName === "PLAYER ACTION").map(x => x.name);
@@ -9,6 +9,10 @@ exports.IFPLAYER_CONDITIONS = db_json_1.default.actions.filter(x => x.codeblockN
 exports.IFENTITY_CONDITIONS = db_json_1.default.actions.filter(x => x.codeblockName === "IF ENTITY").map(x => x.name);
 exports.POTION_TYPES = db_json_1.default.potions.map(x => x.icon.name);
 exports.SOUND_TYPES = db_json_1.default.sounds.map(x => x.icon.name);
+const VariableType_1 = (0, tslib_1.__importDefault)(require("./Components/VariableType"));
+exports.VariableType = VariableType_1.default;
+const CodeblockBuilder_1 = (0, tslib_1.__importDefault)(require("./Builders/CodeblockBuilder"));
+exports.CodeblockBuilder = CodeblockBuilder_1.default;
 const Text_1 = (0, tslib_1.__importDefault)(require("./Components/Variables/Text"));
 exports.Text = Text_1.default;
 exports.txt = Text_1.default;
@@ -30,17 +34,42 @@ exports.dfvar = VarItem_1.default;
 const Player_1 = (0, tslib_1.__importDefault)(require("./Components/Codeblocks/Player"));
 exports.Player = Player_1.default;
 const pako_1 = (0, tslib_1.__importDefault)(require("pako"));
+function compileIfStatement(block, json) {
+    const ifstatementContent = block.dfscript__ifstatementContent;
+    json.blocks.push({ "id": "bracket", "direct": "open", "type": "norm" });
+    ifstatementContent.forEach((if_block) => {
+        if (if_block instanceof CodeblockBuilder_1.default) {
+            compileCustomCodeblock(if_block, json);
+        }
+        else {
+            json.blocks.push(if_block);
+            if (if_block.hasOwnProperty("dfscript__ifstatementContent")) {
+                compileIfStatement(if_block, json);
+            }
+        }
+    });
+    json.blocks.push({ "id": "bracket", "direct": "close", "type": "norm" });
+}
+function compileCustomCodeblock(customblock, json) {
+    customblock.codeblocks.forEach((block) => {
+        if (block instanceof CodeblockBuilder_1.default) {
+            compileCustomCodeblock(block, json);
+        }
+        else {
+            json.blocks.push(block);
+            if (block.hasOwnProperty("dfscript__ifstatementContent")) {
+                compileIfStatement(block, json);
+            }
+        }
+    });
+}
 class Template {
     name;
     codeblocks;
-    creator;
-    sendToCodeutils;
     json;
-    constructor(name, codeblocks, creator, sendToCodeutils = false) {
+    constructor(name, codeblocks) {
         this.name = name;
         this.codeblocks = codeblocks;
-        this.creator = creator;
-        this.sendToCodeutils = sendToCodeutils;
         this.json = {
             "blocks": [
                 {
@@ -59,21 +88,23 @@ class Template {
     }
     compile() {
         this.codeblocks.forEach((block) => {
-            if (block.hasOwnProperty("dfscript__ifstatementContent")) {
-                const ifstatementContnet = block.dfscript__ifstatementContent;
-                delete block.dfscript__ifstatementContent;
-                this.json.blocks.push(block);
-                this.json.blocks.push({ "id": "bracket", "direct": "open", "type": "norm" });
-                ifstatementContnet.forEach((if_block) => {
-                    this.json.blocks.push(if_block);
-                });
-                this.json.blocks.push({ "id": "bracket", "direct": "close", "type": "norm" });
+            if (block instanceof CodeblockBuilder_1.default) {
+                compileCustomCodeblock(block, this.json);
             }
             else {
                 this.json.blocks.push(block);
+                if (block.hasOwnProperty("dfscript__ifstatementContent")) {
+                    compileIfStatement(block, this.json);
+                }
             }
         });
         return (btoa(String.fromCharCode.apply(null, new Uint16Array(pako_1.default.gzip(JSON.stringify(this.json))))));
+    }
+    add(...codeblocks) {
+        codeblocks.forEach(block => this.codeblocks.push(block));
+    }
+    remove(index) {
+        this.codeblocks.splice(index, 1);
     }
 }
 exports.Template = Template;

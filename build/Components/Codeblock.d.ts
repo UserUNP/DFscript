@@ -1,3 +1,4 @@
+import CodeblockBuilder from "../Builders/CodeblockBuilder";
 export default interface Codeblock {
     id: "block";
     block: string;
@@ -12,6 +13,6 @@ export default interface Codeblock {
     };
     action: string;
     target?: string;
-    dfscript__ifstatementContent?: Codeblock[];
+    dfscript__ifstatementContent?: Codeblock[] | CodeblockBuilder[];
     then?(...codeblocks: Codeblock[]): any;
 }

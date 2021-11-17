@@ -6,8 +6,8 @@ export declare const POTION_TYPES: string[];
 export declare const SOUND_TYPES: string[];
 import VariableType from "./Components/VariableType";
 import Codeblock from "./Components/Codeblock";
-export declare type variableType = VariableType;
-export declare type codeblock = Codeblock;
+import CodeblockBuilder from "./Builders/CodeblockBuilder";
+export { VariableType, Codeblock, CodeblockBuilder };
 import Text from "./Components/Variables/Text";
 import Number from "./Components/Variables/Number";
 import Location from "./Components/Variables/Location";
@@ -20,12 +20,12 @@ import Player from "./Components/Codeblocks/Player";
 export { Player };
 export declare class Template {
     name: string;
-    codeblocks: Codeblock[];
-    creator?: string;
-    private sendToCodeutils;
+    codeblocks: Codeblock[] | CodeblockBuilder[];
     json: {
         blocks: any;
     };
-    constructor(name: string, codeblocks: Codeblock[], creator?: string, sendToCodeutils?: boolean);
+    constructor(name: string, codeblocks: Codeblock[] | CodeblockBuilder[]);
     compile(): string;
+    add(...codeblocks: Codeblock[] | CodeblockBuilder[]): void;
+    remove(index: number): void;
 }
