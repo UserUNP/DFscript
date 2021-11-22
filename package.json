@@ -1,6 +1,6 @@
 {
   "name": "dfscript",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A way to create code templates for the Minecraft server DiamondFire, mcdiamondfire.com",
   "main": "build/index.js",
   "types": "build/index.d.ts",
