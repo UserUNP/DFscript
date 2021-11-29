@@ -1,7 +1,7 @@
 import VariableType from "../VariableType";
 
 class Item extends VariableType {
-	constructor(name: string, MCitemIdName: string, slot: number) {
+	constructor(name: string, MCitemIdName: string, slot?: number) {
 		super({ name: name, MCitemIdName: MCitemIdName }, slot);
 	}
 	compile(): { item: { id: string; data: any; }; slot: string; } {
