@@ -1,7 +1,7 @@
 import { PLAYER_ACTIONS, IFPLAYER_CONDITIONS } from "../..";
 import Codeblock from "../Codeblock";
 import VariableType from "../VariableType";
-import CodeblockBuilder from "../../Builders/CodeblockBuilder";
+import PackedBlock from "../../Builders/PackedBlock";
 
 const Player = {
 	/**
@@ -34,7 +34,7 @@ const Player = {
 			block: "if_player",
 			args: { "items": items.map((item) => item.compile()) },
 			action: condition,
-			then: (codeblocks: Codeblock[] | CodeblockBuilder[]): Codeblock => {
+			then: (codeblocks: Codeblock[] | PackedBlock[]): Codeblock => {
 				return {
 					id: "block",
 					block: "if_player",

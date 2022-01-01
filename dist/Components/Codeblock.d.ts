@@ -14,5 +14,5 @@ export default interface Codeblock {
     action: string;
     target?: string;
     dfscript__ifstatementContent?: Codeblock[] | CodeblockBuilder[];
-    then?(...codeblocks: Codeblock[]): any;
+    then?(codeblocks: Codeblock[] | CodeblockBuilder[]): any;
 }

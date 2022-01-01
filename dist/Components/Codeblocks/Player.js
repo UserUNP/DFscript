@@ -4,7 +4,7 @@ const __1 = require("../..");
 const Player = {
     action: (name, items = [], target = "") => {
         if (!(__1.PLAYER_ACTIONS.includes(name)))
-            throw `Player.action ${name} does not exist`;
+            throw new Error(`Player.action ${name} does not exist`);
         return {
             id: "block",
             block: "player_action",
@@ -15,13 +15,13 @@ const Player = {
     },
     if: (condition, items = []) => {
         if (!(__1.IFPLAYER_CONDITIONS.includes(condition)))
-            throw `Player.if ${condition} does not exist`;
+            throw new Error(`Player.if ${condition} does not exist`);
         return {
             id: "block",
             block: "if_player",
             args: { "items": items.map((item) => item.compile()) },
             action: condition,
-            then: (...codeblocks) => {
+            then: (codeblocks) => {
                 return {
                     id: "block",
                     block: "if_player",

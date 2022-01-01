@@ -1,7 +1,8 @@
 import VariableType from "../VariableType";
 
-class VarItem extends VariableType {
-	constructor(name: string, scope: string, slot: number) {
+class Variable extends VariableType {
+	constructor(name: string, scope: "saved" | "game" | "local" | "unsaved", slot: number) {
+		if(scope == "game") scope = "unsaved";
 		super({ name: name, scope: scope }, slot);
 	}
 	compile(): { item: { id: string; data: any; }; slot: string; } {
@@ -9,4 +10,4 @@ class VarItem extends VariableType {
 	}
 }
 
-export default VarItem;
+export default Variable;

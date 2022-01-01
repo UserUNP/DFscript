@@ -1,4 +1,4 @@
-import CodeblockBuilder from "../Builders/CodeblockBuilder";
+import PackedBlock from "../Builders/PackedBlock";
 
 export default interface Codeblock {
     id: "block",
@@ -6,6 +6,6 @@ export default interface Codeblock {
     args: { "items": { "item": { "id": string, "data": any }, "slot": string }[] },
     action: string,
     target?: string,
-    dfscript__ifstatementContent?: Codeblock[] | CodeblockBuilder[],
-    then?(codeblocks: Codeblock[] | CodeblockBuilder[]): any
+    dfscript__ifstatementContent?: Codeblock[] | PackedBlock[],
+    then?(codeblocks: Codeblock[] | PackedBlock[]): any
 }

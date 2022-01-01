@@ -1,6 +1,6 @@
 import VariableType from "../VariableType";
-declare class Item extends VariableType {
-    constructor(name: string, MCitemIdName: string, slot: number);
+declare class VarItem extends VariableType {
+    constructor(name: string, scope: "saved" | "game" | "local" | "unsaved", slot: number);
     compile(): {
         item: {
             id: string;
@@ -9,4 +9,4 @@ declare class Item extends VariableType {
         slot: string;
     };
 }
-export default Item;
+export default VarItem;

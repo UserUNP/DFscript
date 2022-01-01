@@ -10,35 +10,19 @@ export const SOUND_TYPES = db.sounds.map(x => x.icon.name)
 
 import VariableType from "./Components/VariableType";
 import Codeblock from "./Components/Codeblock";
-import CodeblockBuilder from "./Builders/CodeblockBuilder";
+import PackedBlock from "./Builders/PackedBlock";
 export {
 	VariableType,
 	Codeblock,
-	CodeblockBuilder
+	PackedBlock
 }
 
-import Text from "./Components/Variables/Text";
-import Number from "./Components/Variables/Number";
-import Location from "./Components/Variables/Location";
-import Vector from "./Components/Variables/Vector";
-import Item from "./Components/Variables/Item";
-import VarItem from "./Components/Variables/VarItem";
-export {
-	Text,
-	Number,
-	Location,
-	Vector,
-	Item,
-	VarItem
-}
-export {
-	Text as txt,
-	Number as num,
-	Location as loc,
-	Vector as vec,
-	Item as item,
-	VarItem as dfvar
-}
+import Text from "./Components/Variables/Text"; export {Text};
+import Number from "./Components/Variables/Number"; export {Number};
+import Location from "./Components/Variables/Location"; export {Location};
+import Vector from "./Components/Variables/Vector"; export {Vector};
+import Item from "./Components/Variables/Item"; export {Item};
+import Variable from "./Components/Variables/Variable"; export {Variable};
 
 import Player from "./Components/Codeblocks/Player";
 export { Player }
@@ -49,7 +33,7 @@ function compileIfStatement(block: Codeblock, json) {
 	const ifstatementContent = block.dfscript__ifstatementContent;
 	json.blocks.push({ "id": "bracket", "direct": "open", "type": "norm" });
 	ifstatementContent.forEach((if_block) => {
-		if (if_block instanceof CodeblockBuilder) {
+		if (if_block instanceof PackedBlock) {
 			compileCustomCodeblock(if_block, json)
 		}else {
 			json.blocks.push(if_block);
@@ -61,10 +45,10 @@ function compileIfStatement(block: Codeblock, json) {
 	json.blocks.push({ "id": "bracket", "direct": "close", "type": "norm" });
 }
 
-function compileCustomCodeblock(customblock: CodeblockBuilder, json) {
+function compileCustomCodeblock(customblock: PackedBlock, json) {
 	customblock.codeblocks.forEach((block) => {
-		if (block instanceof CodeblockBuilder) {
-			compileCustomCodeblock(<CodeblockBuilder> block, json)
+		if (block instanceof PackedBlock) {
+			compileCustomCodeblock(<PackedBlock> block, json)
 		}else {
 			json.blocks.push(block);
 			if (block.hasOwnProperty("dfscript__ifstatementContent")) {
@@ -76,7 +60,7 @@ function compileCustomCodeblock(customblock: CodeblockBuilder, json) {
 
 export class Template {
 	json: { blocks: any; };
-	constructor(public name: string, public codeblocks: Codeblock[] | CodeblockBuilder[]) {
+	constructor(public name: string, public codeblocks: Codeblock[] | PackedBlock[]) {
 		this.json = {
 			"blocks": [
 				{
@@ -96,7 +80,7 @@ export class Template {
 
 	public compile(): string {
 		this.codeblocks.forEach((block) => {
-			if (block instanceof CodeblockBuilder) {
+			if (block instanceof PackedBlock) {
 				compileCustomCodeblock(block, this.json)
 			}else {
 				this.json.blocks.push(block);
@@ -108,7 +92,7 @@ export class Template {
 		return (btoa(String.fromCharCode.apply(null, new Uint16Array(pako.gzip(JSON.stringify(this.json))))));
 	}
 
-	public add(...codeblocks: Codeblock[] | CodeblockBuilder[]): void {
+	public add(...codeblocks: Codeblock[] | PackedBlock[]): void {
 		codeblocks.forEach(block => this.codeblocks.push(block));
 	}
 
