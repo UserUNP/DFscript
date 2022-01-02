@@ -8,14 +8,10 @@ export const IFENTITY_CONDITIONS: string[] = db.actions.filter(x => x.codeblockN
 export const POTION_TYPES = db.potions.map(x => x.icon.name);
 export const SOUND_TYPES = db.sounds.map(x => x.icon.name)
 
-import VariableType from "./Components/VariableType";
-import Codeblock from "./Components/Codeblock";
-import PackedBlock from "./Builders/PackedBlock";
-export {
-	VariableType,
-	Codeblock,
-	PackedBlock
-}
+import VariableType from "./Components/VariableType"; export {VariableType}
+import Codeblock from "./Components/Codeblock"; export {Codeblock}
+import PackedBlock from "./Builders/PackedBlock"; export {PackedBlock}
+import ItemBuilder from "./Components/Builders/ItemBuilder"; export {ItemBuilder};
 
 import Text from "./Components/Variables/Text"; export {Text};
 import Number from "./Components/Variables/Number"; export {Number};
