@@ -11,7 +11,7 @@
     "build": "echo Compiling Typescript... && tsc && echo Compiled Typescript successfully. && npx browserify dist/index.js -o dist/dfscript.unmin.js --standalone dfscript && echo minifying... && npx uglifyjs dist/dfscript.unmin.js --compress --mangle -o dfscript.min.js && cd dist/ && del dfscript.unmin.js && echo. && echo Done.",
     "start": "npm run build && node dist/index.js",
     "test": "node tests/test.js",
-    "postpublish": "git add . && git commit && git push origin master"
+    "postpublish": "git add . && git commit && git push -f origin master"
   },
   "author": "UserUNP#9235",
   "license": "ISC",
